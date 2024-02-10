@@ -8,7 +8,7 @@ class Solution(object):
         j=i+1
         best=0
         len_arr = len(prices)
-        while (j<len(prices)):
+        while (j<len_arr):
             if (prices[j]-prices[i]<0):
                 i=j
                 j+=1
