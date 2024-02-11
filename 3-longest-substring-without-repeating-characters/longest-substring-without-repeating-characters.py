@@ -4,14 +4,14 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        placeholder = set()
-        l_ss=0
-        l=0
-        for r in range(len(s)):
-            while s[r] in placeholder:
-                placeholder.remove(s[l])
-                l+=1
-            placeholder.add(s[r])
-            l_ss=max(l_ss, r-l+1)
-        return l_ss
-                
+        placeholder=set()
+        j=0
+        len_arr=range(len(s))
+        max_ss=0
+        for i in range(len(s)):
+            while s[i] in placeholder:
+                placeholder.remove(s[j])
+                j+=1
+            placeholder.add(s[i])
+            max_ss=max(max_ss,len(placeholder))
+        return max_ss
