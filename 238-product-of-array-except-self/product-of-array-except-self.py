@@ -4,14 +4,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        len_arr=len(nums)
-        result=[1]*len_arr
+        len_arr = len(nums)
+        results=[1]*len_arr
         prefix=1
         for i in range(len_arr):
-            result[i]=prefix
+            results[i]=prefix
             prefix*=nums[i]
         postfix=1
         for i in range(len_arr-1,-1,-1):
-            result[i]*=postfix
+            results[i]*=postfix
             postfix*=nums[i]
-        return result
+        return results
+            
