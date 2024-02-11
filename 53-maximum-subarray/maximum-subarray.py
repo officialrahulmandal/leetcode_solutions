@@ -8,7 +8,7 @@ class Solution(object):
             return nums[0]
         len_arr=len(nums)
         j=0
-        max_sum=-99999
+        max_sum=float('-inf')
         sum=0
         while(j<len_arr):
             
