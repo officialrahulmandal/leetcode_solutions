@@ -6,12 +6,13 @@ class Solution(object):
         """
         result=[]
         n=len(nums)
-        count={}
-        for i in nums:
-            if i in count:
-                count[i]+=1
-            else:
-                count[i]=1
+        #count={}
+        count=Counter(nums)
+        # for i in nums:
+        #     if i in count:
+        #         count[i]+=1
+        #     else:
+        #         count[i]=1
         for key,value in count.items():
             div=n//3
             if (value>div):
