@@ -4,19 +4,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums)==1:
-            return nums[0]
+        i=0
         len_arr=len(nums)
-        j=0
-        max_sum=-99999
-        sum=0
-        while(j<len_arr):
-            
-            sum+=nums[j]
-            max_sum=max(max_sum,sum)
-            if sum<0:
-                sum=0
-            j+=1
-            
+        if len_arr==1:
+            return nums[0]
+        max_sum=float('-inf')
+        sum_i=float('-inf')
+        while (i<len_arr):
+            if sum_i<0:
+                sum_i=nums[i]
+            else:
+                sum_i+=nums[i]
+            max_sum=max(max_sum,sum_i)
+            i+=1
         return max_sum
+            
         
