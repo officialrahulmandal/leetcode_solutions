@@ -4,7 +4,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        maximum=float('-inf')
+        maximum=-99
         if len(nums)<=1:
             return nums[0]
         count={}
