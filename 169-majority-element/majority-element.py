@@ -14,10 +14,8 @@ class Solution(object):
                 count[i]+=1
             else:
                 count[i]=1
-        print(count)
         for key,value in count.items():
             if value>maximum:
-                print(value,maximum)
                 maximum=value
                 element=key
         return element
