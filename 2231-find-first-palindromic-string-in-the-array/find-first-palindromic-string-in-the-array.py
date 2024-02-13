@@ -13,7 +13,8 @@ class Solution(object):
                     j-=1
                 else:
                     break
-            if i>=len(word)//2 and j<=len(word)//2:
+            half=len(word)//2
+            if i>=half and j<=half:
                 return word
             else:
                 continue
