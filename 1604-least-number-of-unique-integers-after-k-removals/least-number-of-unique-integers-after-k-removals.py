@@ -32,7 +32,7 @@ class Solution(object):
                     stored.pop(0)
                     continue 
                 
-                #break
+                break
         print(stored)
                 
                 
