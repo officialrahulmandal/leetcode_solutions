@@ -1,40 +1,19 @@
-import operator
-class Solution(object):
+class Solution:
     def findLeastNumOfUniqueInts(self, arr, k):
-        """
-        :type arr: List[int]
-        :type k: int
-        :rtype: int
-        """
-        store={}
-        #print(k)
-        for element in arr:
-            if element in store:
-                store[element]+=1
+        freq = defaultdict(int)
+        for num in arr:
+            freq[num] += 1
+
+        min_heap = []
+        for value in freq.values():
+            heapq.heappush(min_heap, value)
+
+        while k > 0:
+            top = heapq.heappop(min_heap)
+            if k >= top:
+                k -= top
             else:
-                store[element]=1
-        stored = list(store.values())
-        stored.sort()
-        #print(stored)
-        i=0
-        while(k>0):
-            if k==0:
-                break
-            if k>=stored[i]:
-                k-=stored[i]
-                stored.pop(0)
-                continue                    
-            else:
-                t=k
-                k-=stored[i]
-                stored[i]-=t
-                if stored[i]==0:
-                    stored.pop(0)
-                    continue 
-                
-                break
-        print(stored)
-                
-                
-        return len(stored)
-        
+                heapq.heappush(min_heap, top - k)
+                k = 0
+
+        return len(min_heap)
