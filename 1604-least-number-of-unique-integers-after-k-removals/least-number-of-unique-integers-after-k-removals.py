@@ -30,7 +30,7 @@ class Solution(object):
                 stored[i]-=t
                 if stored[i]==0:
                     stored.pop(0)
-                     
+                    continue 
                 
                 break
         print(stored)
