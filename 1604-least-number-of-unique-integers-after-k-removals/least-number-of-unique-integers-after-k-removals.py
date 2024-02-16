@@ -7,6 +7,7 @@ class Solution(object):
         :rtype: int
         """
         store={}
+        #print(k)
         for element in arr:
             if element in store:
                 store[element]+=1
@@ -14,6 +15,7 @@ class Solution(object):
                 store[element]=1
         stored = list(store.values())
         stored.sort()
+        #print(stored)
         i=0
         while(k>0):
             if k==0:
@@ -30,7 +32,8 @@ class Solution(object):
                     stored.pop(0)
                     continue 
                 
-                break
+                #break
+        print(stored)
                 
                 
         return len(stored)
