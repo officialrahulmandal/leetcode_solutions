@@ -7,9 +7,9 @@ class Solution(object):
         jump=0
         l=r=0
         while(r<len(array)-1):
-            reach = 0
-            for z in range(l, r+1):
-                reach=max(reach, z+ array[z])
+            reach=0
+            for i in range(l, r+1):
+                reach = max(reach, i+array[i])
             l=r+1
             r=reach
             jump+=1
