@@ -6,13 +6,9 @@ class Solution(object):
         """
         nums.sort()
         len_arr=len(nums)
-        i=0
-        while(i<len_arr):
-            if i!=nums[i]:
-                return i
-                break
-            i+=1
-        return i
+        expected_sum = (len_arr * (len_arr + 1)) / 2
+        num_sum = sum(nums)
+        return expected_sum-num_sum
 
         
         
