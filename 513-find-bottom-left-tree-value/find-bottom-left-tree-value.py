@@ -31,7 +31,6 @@ class Solution(object):
             value = left_v
             diameter=left_d
 
-        print(diameter, value)
         return diameter+1, value
 
         
