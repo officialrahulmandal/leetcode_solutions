@@ -7,10 +7,11 @@ class Solution(object):
         """
         counter=1
         temp=a
+        
         while(len(a)<len(b)):
             a+=temp
             counter+=1
-            
+
         if b in a:
             return counter
             
