@@ -6,7 +6,6 @@ class Solution:
             return nums[0]
         max_t=0
         current_total = 0
-        start=0
         last=0
         for n in nums:
             if n>last:
