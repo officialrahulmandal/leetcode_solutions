@@ -9,16 +9,16 @@ class Solution:
         if root is None:
             return 0
         if root.left is None and root.right is None:
-            return int(carryForward+str(root.val))
-        sum_L = self.sumNumbersHelper(root.left,carryForward+str(root.val))
-        sum_R = self.sumNumbersHelper(root.right,carryForward+str(root.val))
+            return carryForward*10+root.val
+        sum_L = self.sumNumbersHelper(root.left,carryForward*10+root.val)
+        sum_R = self.sumNumbersHelper(root.right,carryForward*10+root.val)
         return sum_L+sum_R
 
 
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         if root is None:
             return
-        return self.sumNumbersHelper(root,'')
+        return self.sumNumbersHelper(root,0)
 
 
         
