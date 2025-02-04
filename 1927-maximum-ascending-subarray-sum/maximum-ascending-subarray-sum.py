@@ -1,21 +1,20 @@
 class Solution:
     def maxAscendingSum(self, nums: List[int]) -> int:
-        if len(nums) == 1:
+        if len(nums)==0:
+            return
+        elif len(nums)==1:
             return nums[0]
-
-        ans = -1
-        cs = 0
-
-        for i in range(len(nums) - 1):
-            if nums[i] < nums[i + 1]:
-                cs += nums[i]
+        max_t=0
+        current_total = 0
+        start=0
+        last=0
+        for n in nums:
+            if n>last:
+                current_total+=n
+                if max_t<current_total:
+                    max_t=current_total
+                last=n
             else:
-                ans = max(ans, cs + nums[i])
-                cs = 0
-                ans = max(ans, nums[i])
-
-        if nums[-1] > nums[-2]:
-            ans = max(ans, cs + nums[-1])
-            ans = max(ans, nums[-1])
-
-        return ans
+                current_total=n
+                last=n
+        return max_t
