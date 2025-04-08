@@ -1,0 +1,1 @@
+class Solution: minimumOperations = lambda _, a: ceil(((a := [a[0]] + a), next((i for i in range(len(a) - 1, -1, -1) if a[i] in s or (s.add(a[i]))), s := set()))[1] / 3)
