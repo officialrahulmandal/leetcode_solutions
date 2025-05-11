@@ -1,11 +1,4 @@
 class Solution:
-    def threeConsecutiveOdds(self, arr: List[int]) -> bool:
-        odds = 0
-        for num in arr:
-            if num % 2 == 1:
-                odds += 1
-                if odds == 3:
-                    return True
-            else:
-                odds = 0
-        return False
+    def threeConsecutiveOdds(self, a: List[int]) -> bool:
+        return False if len(a)<3 else any(1&a[i]&a[i+1]&a[i+2] for i in range(len(a)-2))
+        
