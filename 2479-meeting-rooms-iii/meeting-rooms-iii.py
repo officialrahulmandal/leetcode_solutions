@@ -1,31 +1,26 @@
+import heapq
+
 class Solution:
-    def mostBooked(self, n, meetings):
-        ans = [0] * n
-        times = [0] * n
-        meetings.sort()
-
-        for start, end in meetings:
-            flag = False
-            minind = -1
-            val = float('inf')
-            for j in range(n):
-                if times[j] < val:
-                    val = times[j]
-                    minind = j
-                if times[j] <= start:
-                    flag = True
-                    ans[j] += 1
-                    times[j] = end
-                    break
-            if not flag:
-                ans[minind] += 1
-                times[minind] += (end - start)
-
-        maxi = -1
-        id = -1
-        for i in range(n):
-            if ans[i] > maxi:
-                maxi = ans[i]
-                id = i
-        return id
-
+    def mostBooked(self, n: int, meetings: list[list[int]]) -> int:
+        meetings.sort(key=lambda x: x[0])
+        free = list(range(n))
+        heapq.heapify(free)
+        busy = []
+        cnt = [0]*n
+        for start, e in meetings:
+            while busy and busy[0][0] <= start:
+                _, r = heapq.heappop(busy)
+                heapq.heappush(free, r)
+            dur = e - start
+            if free:
+                r = heapq.heappop(free)
+                end = e
+            else:
+                t, r = heapq.heappop(busy)
+                end = t + dur
+            cnt[r] += 1
+            heapq.heappush(busy, (end, r))
+        m = max(cnt)
+        for i, val in enumerate(cnt):
+            if val == m:
+                return i
