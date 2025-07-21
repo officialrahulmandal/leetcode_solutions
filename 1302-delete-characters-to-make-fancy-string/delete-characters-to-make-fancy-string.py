@@ -1,13 +1,17 @@
 class Solution:
     def makeFancyString(self, s: str) -> str:
-        ans = s[0]
-        cnt = 1
-        for i in range(1, len(s)):
-            if s[i] == ans[-1]:
-                cnt += 1
-                if cnt < 3:
-                    ans += s[i]
+        l = len(s)
+        if l <= 2:
+            return s
+        res = [s[0]]
+        continous = 1
+        for i in range(1, l):
+            if s[i] == s[i-1]:
+                if continous < 2:
+                    continous += 1
+                    res.append(s[i])
             else:
-                cnt = 1
-                ans += s[i]
-        return ans
+                continous = 1
+                res.append(s[i])
+        return "".join(res)
+        
