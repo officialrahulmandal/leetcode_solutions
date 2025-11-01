@@ -3,29 +3,27 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-
-
 class Solution:
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
-        s = set(nums)
         
-        while head and head.val in s:
-            head = head.next
-        
-      
-        if not head:
-            return None
+        nums = set(nums)
 
-        prev = head
-        curr = head.next
+        node_list = []
+        ptr = head
+        while(ptr != None):
+            node_list.append(ptr)
+            ptr = ptr.next
         
-        while curr:
-            if curr.val not in s:
-                prev.next = curr
-                prev = curr
-            curr = curr.next
+        refined_list = []
+        for i, e in enumerate(node_list):
+            if(e.val not in nums):
+                refined_list.append(e)
         
-        prev.next = None
-        return head
+        i = 0
+        while(i < len(refined_list) - 1):
+            refined_list[i].next = refined_list[i + 1]
+            i += 1
 
-        
+        refined_list[-1].next = None
+
+        return refined_list[0]
