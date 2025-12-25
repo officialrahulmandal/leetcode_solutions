@@ -1,13 +1,13 @@
 class Solution:
-    def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
-        happiness.sort(reverse=True)
-        i = 0
-        res = 0
-
-        while k > 0:
-            happiness[i] = max(happiness[i] - i, 0)
-            res += happiness[i]
-            i += 1
-            k -= 1
-
-        return res
+    def maximumHappinessSum(self, christmasJoy: List[int], gifts: int) -> int:
+        # Santa gives gifts to the happiest children first
+        christmasJoy.sort(reverse=True)
+        
+        totalJoy = 0
+        for turn in range(gifts):
+            currentJoy = christmasJoy[turn] - turn
+            if currentJoy <= 0:
+                break
+            totalJoy += currentJoy
+        
+        return totalJoy
