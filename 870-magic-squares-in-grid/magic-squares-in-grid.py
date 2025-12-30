@@ -1,46 +1,48 @@
-from typing import List
-
 class Solution:
-    def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
-        def check_equal_row_sums(matrix):
-            # Calculate the sum of the first row
-            row_sum = sum(matrix[0])
-            # Check if all other rows have the same sum
-            for row in matrix:
-                if sum(row) != row_sum:
+    def isMagic(self, grid: List[List[int]], r: int, c: int) -> bool:
+        # Step 1: Check Uniqueness and Range (1-9)
+        seen = [0] * 10
+        
+        for i in range(r, r + 3):
+            for j in range(c, c + 3):
+                val = grid[i][j]
+                if val < 1 or val > 9 or seen[val]:
                     return False
-            return True
+                seen[val] = 1
         
-        def check_equal_col_sum(matrix):
-            # Transpose the matrix to check column sums using row sum checker
-            transposed = [list(row) for row in zip(*matrix)]
-            return check_equal_row_sums(transposed)
+        # Step 2: Check Sums
+        # Row 1
+        if grid[r][c] + grid[r][c + 1] + grid[r][c + 2] != 15: return False
+        # Row 3
+        if grid[r + 2][c] + grid[r + 2][c + 1] + grid[r + 2][c + 2] != 15: return False
         
-        def check_diagonals(matrix):
-            n = len(matrix)
-            # Sum of the main diagonal (top-left to bottom-right)
-            d1 = sum(matrix[i][i] for i in range(n))
-            # Sum of the anti-diagonal (top-right to bottom-left)
-            d2 = sum(matrix[i][n-i-1] for i in range(n))
-            # Both diagonals must have the same sum and match the row sum
-            return d1 == d2 and d1 == sum(matrix[0])
+        # Col 1
+        if grid[r][c] + grid[r + 1][c] + grid[r + 2][c] != 15: return False
+        # Col 3
+        if grid[r][c + 2] + grid[r + 1][c + 2] + grid[r + 2][c + 2] != 15: return False
         
-        def is_magic_square(matrix):
-            # Flatten the matrix and sort to check for all numbers 1-9
-            flattened = [num for row in matrix for num in row]
-            if sorted(flattened) != list(range(1, 10)):
-                return False
-            # Check row sums, column sums, and diagonal sums
-            return check_equal_row_sums(matrix) and check_equal_col_sum(matrix) and check_diagonals(matrix)
+        # Diagonal 1
+        if grid[r][c] + grid[r + 1][c + 1] + grid[r + 2][c + 2] != 15: return False
+        # Diagonal 2
+        if grid[r + 2][c] + grid[r + 1][c + 1] + grid[r][c + 2] != 15: return False
         
+        return True
+
+    def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        
+        if m < 3 or n < 3:
+            return 0
+            
         count = 0
-        rows, cols = len(grid), len(grid[0])
-        
-        # Loop through each possible 3x3 subgrid
-        for i in range(rows - 2):
-            for j in range(cols - 2):
-                subgrid = [row[j:j+3] for row in grid[i:i+3]]
-                if is_magic_square(subgrid):
+        # Iterate up to m-3 (inclusive in loop logic, so range goes to m-2)
+        for i in range(m - 2):
+            for j in range(n - 2):
+                # Optimization: Center must be 5
+                if grid[i + 1][j + 1] != 5:
+                    continue
+                
+                if self.isMagic(grid, i, j):
                     count += 1
-        
+                    
         return count
