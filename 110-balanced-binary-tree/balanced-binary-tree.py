@@ -1,31 +1,24 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
-    def height(self, root):
-        if root is None:
-            return 0, True
-        lh, lb=self.height(root.left)
-        rh, rb=self.height(root.right)
-        if lh-rh>1 or rh-lh>1:
-            return 1+max(lh,rh),False
-        elif lb and rb:
-            return 1+max(lh,rh),True
-        else:
-            return 1+max(lh,rh),False
-        
-    def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        if root is None:
-            return True
-        lh, lb = self.height(root.left)
-        rh, rb=self.height(root.right)
-        if lh-rh>1 or rh-lh>1:
-            return False
-        elif lb and rb:
-            return True
-        else:
-            return False
-        
+    def isBalanced(self, root: TreeNode) -> bool:
+        return self.height(root) != -1
+
+    def height(self, node: TreeNode) -> int:
+        if not node:
+            return 0  # Base case: empty tree has height 0
+
+        # Recursively get the height of the left subtree
+        leftHeight = self.height(node.left)
+        if leftHeight == -1:
+            return -1  # If the left subtree is unbalanced, return -1
+
+        # Recursively get the height of the right subtree
+        rightHeight = self.height(node.right)
+        if rightHeight == -1:
+            return -1  # If the right subtree is unbalanced, return -1
+
+        # If the height difference between left and right subtrees is more than 1, return -1
+        if abs(leftHeight - rightHeight) > 1:
+            return -1
+
+        # Return the height of the current node
+        return max(leftHeight, rightHeight) + 1
