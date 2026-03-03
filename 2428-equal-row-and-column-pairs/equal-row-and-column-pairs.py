@@ -18,7 +18,6 @@ class Solution:
             for j in range(len(grid)):
                 value.append(grid[j][i])
             if tuple(value) in columns:
-                print('r',value,columns[tuple(value)])
                 count+=columns[tuple(value)]
             if tuple(value) in rows:
                 rows[tuple(value)]+=1
@@ -26,9 +25,6 @@ class Solution:
                 rows[tuple(value)]=1
         for c in columns:
             if c in rows:
-                print('c',c,rows[c])
                 count1+=rows[c]
         return max(count,count1)
-        print('-->columns',columns)
-        print('row',rows)
         
