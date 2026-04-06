@@ -1,21 +1,26 @@
 class Solution:
-    def robotSim(self,commands,obstacles):
-        x,y,d=0,0,0
-        direction=[(0,1),(1,0),(0,-1),(-1,0)]
-        max_distance=0
-        obstacles=set(map(tuple,obstacles))
-        
-        for cmd in commands:
-            if cmd==-1:
-                d=(d+1)%4
-            elif cmd==-2:
-                d=(d-1)%4
+    def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
+        obSet=set()
+        for (x, y) in obstacles:
+            obSet.add((x, y))
+        dir=[(0, 1), (-1, 0), (0, -1), (1, 0)]
+        x, y,dx, dy, face, maxD2=0, 0, 0,1, 0, 0
+        for  c in commands:
+            if c==-2:
+                face=(face+1)&3
+                dx=dir[face][0]
+                dy=dir[face][1]
+            elif c==-1:
+                face=(face+3)&3
+                dx=dir[face][0]
+                dy=dir[face][1]
             else:
-                for _ in range(cmd):
-                    nx,ny=x+direction[d][0],y+direction[d][1]
-                    if (nx,ny) in obstacles:
+                for i in range(c):
+                    x+=dx
+                    y+=dy
+                    if (x, y) in obSet:
+                        x-=dx
+                        y-=dy
                         break
-                    x,y=nx,ny
-                    max_distance=max(max_distance,x*x+y*y)
-        
-        return max_distance
+                maxD2=max(maxD2, x*x+y*y)
+        return maxD2
