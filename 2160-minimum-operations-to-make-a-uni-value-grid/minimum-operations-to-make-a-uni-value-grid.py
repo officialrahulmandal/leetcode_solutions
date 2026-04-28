@@ -1,13 +1,7 @@
+import numpy as np
 class Solution:
     def minOperations(self, grid: List[List[int]], x: int) -> int:
-        arr = [num for row in grid for num in row]  # Flatten the grid
-        arr.sort()
-        median = arr[len(arr) // 2]  # Find the median
+        arr = np.array([c for row in grid for c in row])
+        med = np.partition(arr, len(arr)//2)[len(arr)//2]
+        return  int(np.abs(arr-med).sum())//x if np.all((arr %x) == (arr[0] %x)) else -1
         
-        # Check if all elements can be transformed
-        for num in arr:
-            if (num - median) % x != 0:
-                return -1  # Impossible case
-
-        # Calculate the minimum number of operations
-        return sum(abs(num - median) // x for num in arr)
