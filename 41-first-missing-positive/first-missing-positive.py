@@ -1,20 +1,28 @@
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        # Function to swap elements in the array
-        def swap(arr, i, j):
-            arr[i], arr[j] = arr[j], arr[i]
+        scope = len(nums)
+        for i in range(scope):
+            val = nums[i]
+            if 0<val<=scope:
+                continue
+            else:
+                nums[i]=scope+1
+
+        print(nums)
+
+
+        #removing out of scope
+        for i in range(scope):
+            val = abs(nums[i])
+            if val>scope:
+                continue
+            elif nums[val-1]>0:
+                nums[val-1]=-(nums[val-1])
+
         
-        n = len(nums)
-        
-        # Place each positive integer i at index i-1 if possible
-        for i in range(n):
-            while 0 < nums[i] <= n and nums[i] != nums[nums[i] - 1]:
-                swap(nums, i, nums[i] - 1)
-        
-        # Find the first missing positive integer
-        for i in range(n):
-            if nums[i] != i + 1:
+        for i in range(scope):
+            if nums[i]>0:
                 return i + 1
+
+        return scope + 1
         
-        # If all positive integers from 1 to n are present, return n + 1
-        return n + 1
