@@ -8,7 +8,7 @@ class Solution:
             else:
                 nums[i]=scope+1
 
-        print(nums)
+        
 
 
         #removing out of scope
