@@ -1,13 +1,15 @@
 class Solution:
     def check(self, nums: List[int]) -> bool:
-        count =0
-        n=len(nums)
-
-        for i in range(n):
-            if nums[i]>nums[(i+1)%n]:
-                count+=1
-
-        if count>1:
-            return False
+        dip = 0
+        prev=nums[-1]
+        
+        for num in nums:
+            if prev>num:
+                dip += 1
+                if dip > 1:
+                    return False
+                
+            prev = num
 
         return True
+        
