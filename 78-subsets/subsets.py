@@ -1,6 +1,4 @@
 class Solution:
-    def helper(nums):
-        num
     def subsets(self, nums: List[int]) -> List[List[int]]:
         subset = []
         curr = []
