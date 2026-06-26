@@ -1,21 +1,17 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        storage = 0
-        i = 0
-        j = len(height)-1
+        left = 0
+        right = len(height)-1
+        total = 0
+        max_ = 0
 
-        while i<j:
-            containes = min(height[i], height[j]) * (j-i)
-
-            if containes > storage:
-                storage = containes
-            
-            if height[i] > height[j]:
-                j-=1
-
+        while left<right:
+            cap = min(height[left],height[right])
+            max_ = max(max_, cap*(right-left))
+            if height[left] < height[right]:
+                left+=1
             else:
-                i+=1
-
-        return storage
-
+                right -= 1
+            
+        return max_
         
