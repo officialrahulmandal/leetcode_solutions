@@ -3,18 +3,16 @@ class Solution:
         if len(s)==0:
             return 0
 
-        store = set()
+        #store = set()
+        last_seen = {}
         start = 0
-        store.add(s[start])
-        max_ = 1
+        max_ = 0
 
-        for i in range(1, len(s)):
-            if s[i] in store:
-                while s[i] in store:
-                    store.remove(s[start])
-                    start+=1
+        for i, ch in enumerate(s):
+            if ch in last_seen and last_seen[ch] >= start:
+                start=last_seen[ch]+1
             
-            store.add(s[i])
+            last_seen[ch] = i
 
             max_ = max(max_, i-start+1)
             
