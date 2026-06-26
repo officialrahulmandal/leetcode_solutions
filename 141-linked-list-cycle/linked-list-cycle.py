@@ -6,12 +6,17 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        turtle=rabbit=head
-
-        while rabbit and rabbit.next:
-            turtle=turtle.next
-            rabbit=rabbit.next.next
-            if turtle == rabbit:
+        if not head:
+            return
+        turtle = head
+        fast = head.next
+        while fast and fast.next :
+            if turtle == fast:
                 return True
+            turtle=turtle.next
+            fast=fast.next.next
+
+            
+
         return False
         
