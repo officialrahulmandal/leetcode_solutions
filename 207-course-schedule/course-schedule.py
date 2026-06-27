@@ -1,24 +1,28 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        adj = [[] for _ in range(numCourses)]
-        inorder = [0] * numCourses
-
+        indegree = [0] * numCourses
+        adjMatrix = [[] for _ in range(numCourses)]
         for child, parent in prerequisites:
-            adj[parent].append(child)
-            inorder[child]+=1
+            adjMatrix[parent].append(child)
+            indegree[child]+=1
 
-        queue = collections.deque([i for i in range(numCourses) if inorder[i]==0])
+        queue = []
+        for i in range(numCourses):
+            if indegree[i]==0:
+                queue.append(i)
 
-        results=[]
+        visited = 0
         while queue:
-            element = queue.popleft()
-            results.append(element)
-            for neighbour in adj[element]:
-                inorder[neighbour] -= 1
-                if inorder[neighbour]==0:
-                    queue.append(neighbour)
+            node = queue.pop(0)
+            visited += 1
+            for i in adjMatrix[node]:
+                indegree[i]-=1
+                if indegree[i] == 0:
+                    queue.append(i)
 
-        return True if len(results)==numCourses else False
+        return numCourses == visited
 
 
+
+            
         
