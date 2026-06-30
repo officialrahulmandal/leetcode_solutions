@@ -1,11 +1,18 @@
-from collections import Counter
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        count = Counter(nums)
-        sorted_items = sorted(count.items(), key=lambda x: x[1], reverse=True)
+        count  = {}
+        freq  = [[] for i in range(len(nums)+1)]
         res = []
-        for num, freq in sorted_items:
-            res.append(num)
-            if len(res) == k:
-                return res
-    
+        for n in nums:
+            count[n] = 1 + count.get(n, 0)
+        for v, c in count.items():
+            freq[c].append(v)
+
+        for i in range(len(freq)-1, 0, -1):
+            for value in freq[i]:
+                res.append(value)
+                if len(res)>=k:
+                    return res
+
+        
+        
